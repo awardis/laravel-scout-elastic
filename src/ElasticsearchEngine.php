@@ -170,7 +170,7 @@ class ElasticsearchEngine extends Engine
      * Pluck and return the primary keys of the given results.
      *
      * @param  mixed  $results
-     * @return \Illuminate\Support\Collection
+     * @return Collection
      */
     public function mapIds($results)
     {
@@ -179,7 +179,7 @@ class ElasticsearchEngine extends Engine
         }
 
         return collect($results['hits']['hits'])
-            ->pluck('_id')->values();
+            ->pluck('_id')->values()->all();
     }
 
     /**
