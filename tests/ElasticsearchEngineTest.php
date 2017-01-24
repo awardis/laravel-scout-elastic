@@ -117,7 +117,7 @@ class ElasticsearchEngineTest extends PHPUnit_Framework_TestCase
         ]);
 
         $this->assertEquals(1, count($results));
-        $this->assertEquals([1], $results->toArray());
+        $this->assertEquals([1], $results);
     }
 }
 
