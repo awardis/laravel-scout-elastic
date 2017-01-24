@@ -99,6 +99,27 @@ class ElasticsearchEngineTest extends PHPUnit_Framework_TestCase
 
         $this->assertEquals(1, count($results));
     }
+
+    public function test_mapids_correctly_plucks_ids()
+    {
+        $client = Mockery::mock('Elasticsearch\Client');
+        $engine = new ElasticsearchEngine($client, 'scout');
+
+        $results = $engine->mapIds([
+            'hits' => [
+                'total' => '1',
+                'hits' => [
+                    [
+                        '_id' => '1'
+                    ]
+                ]
+            ]
+        ]);
+
+        $this->assertEquals(1, count($results));
+        $this->assertTrue($results instanceof \Illuminate\Support\Collection);
+        $this->assertEquals([1], $results->toArray());
+    }
 }
 
 class ElasticsearchEngineTestModel extends \Illuminate\Database\Eloquent\Model
